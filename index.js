@@ -15,8 +15,8 @@ app.get('/price', async (req, res) => {
     );
     res.json(prices);
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Error fetching prices');
+    console.error('API 요청 에러:', error.response ? error.response.data : error.message);
+    res.status(500).send(error.response ? error.response.data : error.message);
   }
 });
 
