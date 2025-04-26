@@ -7,7 +7,9 @@ app.get('/price', async (req, res) => {
     const symbols = ['BTCUSDT', 'ETHUSDT'];
     const prices = await Promise.all(
       symbols.map(async (symbol) => {
-        const response = await axios.get(`https://fapi.binance.com/fapi/v1/ticker/price?symbol=${symbol}`);
+        const response = await axios.get(`https://fapi.binance.com/fapi/v1/ticker/price?symbol=${symbol}`, {
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
         return { symbol: symbol, price: response.data.price };
       })
     );
